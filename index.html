@@ -134,6 +134,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @keyframes swap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
 /* ---------- courses ---------- */
+.academy[hidden],#courses[hidden]{display:none!important}
 .academy{
   position:relative;overflow:hidden;isolation:isolate;border-radius:var(--r-xl);padding:26px 14px 14px;color:#fff;
   background:linear-gradient(166deg,var(--wine) 6%,var(--wine-2) 80%);
@@ -342,6 +343,9 @@ function showPerson(i){
   panel.innerHTML = `<div class="who panel-enter"><div class="txt"><h3>${p.name}</h3><div class="roles">${p.role.split(', ').map(r=>`<span>${r}</span>`).join('')}</div></div><img src="${p.img}" alt="${p.name}"></div>` +
     p.groups.map(g => `<div class="group panel-enter"><h4>${g.h}</h4>${g.rows.join('')}${g.sub?`<div class="sub-group"><h5>${g.sub.h}</h5>${g.sub.rows.join('')}</div>`:''}${(g.after||[]).join('')}</div>`).join('') +
     `<p class="note"><b>Важно:</b> стоимость определяется индивидуально в зависимости от показаний пациента.</p>`;
+  const showEdu = p.id !== 'aitolkyn';
+  document.getElementById('courses').hidden = !showEdu;
+  document.getElementById('academy').hidden = !showEdu;
 }
 seg.addEventListener('click', e => { const b = e.target.closest('button'); if(b) showPerson(+b.dataset.i); });
 showPerson(0);
